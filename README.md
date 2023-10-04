@@ -1,5 +1,5 @@
 # Website
-Create a website using flask and rest api. The website is hosted on pythonanywhere.com and and has many routes:
+Create a website using flask and rest api. The website is hosted on pythonanywhere.com and and has many routes. Users details are stored and managed in a database using MySQL.
 
 ![image](https://github.com/mihai-ciorobitca/Website/assets/146944097/cb393228-dc08-4980-a074-f33fead636b1)
 Login page
