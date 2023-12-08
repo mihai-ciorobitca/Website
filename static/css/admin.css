@@ -1,0 +1,232 @@
+body {
+    background-image: url(/static/background.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f1f1f1;
+    margin: 0;
+    height: 100vh;
+    background-clip: content-box;
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.search-input-div {
+  padding: 10px;
+  background-color: white;
+}
+
+
+.table-div {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  border: 0px solid black;
+  padding: 10px;
+  background-color: white;
+}
+
+.label-element {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-input {
+    width: 50%;
+    height: 50%;
+}
+
+.search-button {
+    width: 50%;
+    height: 50%;
+}
+
+.header-div {
+  background: linear-gradient(to left, #15D040, #469FBF);
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: space-around;
+  border: 0px solid black;
+}
+
+.header-cell-1, .header-cell-3,
+.header-cell-4, .header-cell-5,
+.header-cell-6, .header-cell-7{
+  height: 100%;
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+}
+
+.header-cell-2 {
+  height: 100%;
+  width: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+}
+
+.content-div {
+  width: 100%;
+  height: 90%;
+  overflow-y: scroll;
+}
+
+.table {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.table-row {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  border-bottom: 1px solid black;
+}
+
+.table-cell-1, .table-cell-3,
+.table-cell-4, .table-cell-5,
+.table-cell-6, .table-cell-7 {
+  width: 20%;
+  height: 100%;
+}
+
+.table-cell-2 {
+  width: 10%;
+  height: 100%;
+}
+
+.table-cell-1, .table-cell-2, .table-cell-3 {
+    display: flex;
+    justify-content: center;
+}
+
+.table-cell-3 .search-input {
+  width: 45%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-cell-3 .search-button {
+  width: 45%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-div {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+}
+
+.search-label {
+  width: 50%;
+  height: 50%;
+  display: flex;
+  align-items: right;
+  justify-content: right;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.search-input-div {
+  width: 50%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.search-input-down:focus, .search-input:focus {
+  outline: none;
+}
+
+.search-input-down {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: none;
+  text-align: left;
+}
+
+form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.table-cell-1 .label-element, .table-cell-2 .label-element {
+    width: 100%;
+}
+
+button {
+      margin: 0 auto;
+      width: 70%;
+      height: 70%;
+      color: white;
+      background: #1dc955;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+}
+
+.unconfirmed {
+    background-color: red;
+}
+
+.confirmed {
+    background-color: green;
+}
+
+.status-button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+select {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 5px;
+}
