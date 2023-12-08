@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous">
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.ico') }}">
+        <title>Login</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script>
+            $(document).ready(function(){
+                $("form").submit(function(e){
+                    e.preventDefault();
+                    var data = $(this).serialize();
+                    $.post("/login", data, function(result){
+                        if (result.result === "admin") {
+                            window.location.href = "/admin";
+                        }
+                        else if (result.result === "home") {
+                            window.location.href = "/home";
+                        }
+                        else if (result.result === "unconfirmed") {
+                            alert("Ask admin to confirm account");
+                        }
+                        else if(result.result === "error") {
+                            alert("Invalid username or password");
+                        }
+                        else {
+                            alert("Unexpected error");
+                        }
+                    });
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <form method="POST" action="{{url_for('login')}}">
+            <h1> Login </h1>
+            <input type="text" name="username" id="username" placeholder="Enter your username"
+                       autocomplete="on" maxlength="20" class="pulse-highlight" required/>
+			<div style="position: relative;">
+			  <input type="password" name="password" id="password" placeholder="Enter your password"
+			         autocomplete="off" maxlength="64" class="pulse-highlight" required/>
+			  <button type="button" class="reveal-password-button" onclick="togglePasswordVisibility()">
+				<i class="fa fa-eye-slash" aria-hidden="true"></i>
+			  </button>
+			</div>
+			<div>
+				<button style="margin-right: 8px;" type="submit" name="login" value="login" id="login-button" >Log in</button>
+			</div>
+			<p>Don't have an account? <a style="color: #4cb050; text-decoration: none;" href="{{ url_for('register') }}">Register</a></p>
+			<p>Forget password? <a style="color: #4cb050; text-decoration: none;" href="{{ url_for('recover') }}">Recover password</a></p>			<p id="error"></p>
+		</form>
+    </body>
+	<script>
+	    var loginButton = document.getElementById("login-button");
+        var inputUsername = document.getElementById("username");
+        var inputPassword = document.getElementById("password");
+        var toggleButton = document.getElementById("toggleButton");
+        var isAssistanceEnabled = false;
+        var username = document.getElementById('username');
+
+        username.addEventListener('paste', function(event) {
+            event.preventDefault();
+        });
+
+		function togglePasswordVisibility() {
+		  const passwordInput = document.getElementById('password');
+		  const revealPasswordButton = document.querySelector('.reveal-password-button');
+		  const currentType = passwordInput.type;
+		  if (currentType === 'password') {
+			passwordInput.type = 'text';
+			revealPasswordButton.innerHTML = '<i class="fa fa-eye" aria-hidden="true"></i>';
+		  } else {
+			passwordInput.type = 'password';
+			revealPasswordButton.innerHTML = '<i class="fa fa-eye-slash" aria-hidden="true"></i>';
+		  }
+		}
+
+		function clearInput() {
+			document.getElementById("username").value = "";
+			document.getElementById("password").value = "";
+		}
+	</script>
+</html>
