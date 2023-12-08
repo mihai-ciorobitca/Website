@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <link rel="icon" type="image/x-icon" href="static/favicon.ico">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("form.retract").submit(function(e){
+                e.preventDefault();
+                var confirmSubmit = confirm('Are you sure you want to create this task?');
+                if (confirmSubmit === true) {
+                    var data = $(this).serialize();
+                    $.post("/retract", data, function(result){
+                        if (result.result === "created") {
+                            if(!alert("Task created")) {
+                               window.location.reload();
+                            }
+                        }
+                        else if(result.result === "not-created") {
+                            alert("Could not created");
+                        }
+                        else if(result.result === "duplicated") {
+                            alert("Duplicated task");
+                        }
+                        else if(result.result === "no-credits"){
+                            alert("Not available at the moment");
+                        }
+                        else {
+                            alert(`Bad request ${result.result}`);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="unavailable-overlay">
+        Currently Unavailable, we are coming back soon!
+    </div>
+    <main>
+        <h1>Welcome, {{ username }}</h1>
+        <p>You have {{ credits }} credits.</p>
+        <form class="retract" action="/retract" method="POST">
+            <select disabled id="platform-select" name="platform-select" onchange="populateScrapeTypeSelect()">
+                <option value="instagram">Instagram</option>
+                <option value="telegram">Telegram</option>
+                <option value="twitter">Twitter</option>
+                <option value="facebook">Facebook</option>
+                <option value="linkedin">Linkedin</option>
+                <option value="tiktok">TikTok</option>
+                <option value="discord">Discord</option>
+            </select>
+            <div style="position: relative;">
+                <input disabled type="text" id="task-name" name="task-name" autocomplete="off"
+                       max="40" placeholder="Task name" required>
+            </div>
+            <div style="position: relative;">
+                <input disabled type="text" id="scrape-info" name="scrape-info" autocomplete="off" max="40"
+                  placeholder="Collect info" onkeypress="return validateInput(event, this.pattern)"
+                  oninput="limitInput(this, 100)" required>
+            </div>
+            <input disabled type="number" id="max-emails" name="max-emails" min="1000" max="{{ credits }}"
+                 pattern="^[1-9][0-9]*[^eE]$" placeholder="How many data to collect" onblur="limitInput(this, 8)"
+                 title = "" required/>
+            <select id="scrape-type" name="scrape-type" disabled>
+                <option value="" disabled selected>Collect type</option>
+                <option value="HT">HT (Hashtag)</option>
+                <option value="FL">FL (Followers)</option>
+                <option value="FO">FO (Followings)</option>
+            </select>
+            <button type="submit" id="create" disabled>Create Task</button>
+        </form>
+        <form class="task-list" action="{{ url_for('tasks_list') }}" method="POST">
+            <input type="hidden" name="username" value = "{{ username }}">
+            <button type="submit" disabled>Tasks List</button>
+        </form>
+        <form class="logout" action="{{url_for('logout')}}" method="POST">
+            <button type="submit" class="buttonLogout">Logout</button>
+        </form>
+    </main>
+    <button type="button" class="button-icon" onclick="window.location.href='/home/filter'">Filter Leads</button>
+    <script>
+            var platformSelect = document.getElementById("platform-select");
+            var options = platformSelect.options;
+
+            for (var i = 1; i < options.length; i++) {
+                //options[i].disabled = true;
+            }
+
+            function validateInput(event, pattern) {
+                var charCode = event.which || event.keyCode;
+                var input = event.target.value + String.fromCharCode(charCode);
+                var patternRegex = new RegExp(pattern);
+                if (!patternRegex.test(input)) {
+                  event.preventDefault();
+                }
+            }
+
+            function limitInput(element, maxLength) {
+                const value = parseInt(element.value);
+                const credits = parseInt("{{ credits }}");
+                if (value.length > maxLength) {
+                    element.value = element.value.slice(0, maxLength);
+                }
+
+                if (value > credits) {
+                    alert("Not enough credits");
+                } else if (value < 1000){
+                    alert("Min 1000 emails required");
+                }
+            }
+
+            function populateScrapeTypeSelect() {
+                let platformSelect = document.getElementById("platform-select");
+                let scrapeType = document.getElementById("scrape-type");
+                let scrapeInfo = document.getElementById("scrape-info");
+
+                if (platformSelect.value !== "instagram") {
+                    scrapeType.style.display = "none";
+                    scrapeInfo.placeholder = "URL";
+                } else {
+                    scrapeType.style.display = "inline";
+                    scrapeInfo.placeholder = "Collect info";
+                }
+            }
+
+            populateScrapeTypeSelect();
+        </script>
+    </body>
+</html>
