@@ -1,0 +1,137 @@
+body {
+    background-image: url(/static/background.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f1f1f1;
+    margin: 0;
+    height: 100vh;
+    background-clip: content-box;
+}
+
+.unavailable-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: red;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    z-index: 9999;
+}
+
+h1 {
+  color: #444;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+main {
+    overflow: auto;
+    background-color: #fff;
+    width:35vw;
+    height: 85vh;
+    padding: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    position: relative;
+}
+
+input, button, select {
+  font-size: 0.8em;
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  position: relative;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.buttonLogout {
+    background-color: black;
+}
+
+input::after {
+    content: "";
+    background-image: url(/static/user.svg);
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+}
+
+.buttonDown {
+    background-color: #4CAF50;
+	position: fixed;
+	font-weight: bold;
+	right: 20px;
+	bottom: 20px;
+	border: none;
+	color: white;
+	padding: 16px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input:focus {
+    outline: none;
+}
+
+select:focus {
+    outline: none;
+}
+
+#scrape-type option:first-child,
+#scrape-type option:first-child[disabled] {
+  color: gray;
+}
+
+.button-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border: none;
+  width: 75px;
+  height: 75px;
+  cursor: pointer;
+}
+
+.input-container {
+    position: relative;
+    margin-bottom: 8px;
+}
+
+input[type="text"] {
+    font-size: 0.8em;
+    width: 80%;
+    padding: 12px 20px; /* Adjusted padding for the icon */
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    position: relative;
+}
